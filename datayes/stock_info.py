@@ -5,7 +5,7 @@ import requests
 import pandas as pd
 
 
-def download_stock_info(cloud_sso_token, data_path="../data/stock_info.csv"):
+def get_stock_info(cloud_sso_token, data_path="../data/stock_info.csv"):
     logger = commons.get_logger()
     # 合并两个 DataFrame，并覆盖前面的数据
     all_df = pd.DataFrame({})
@@ -37,7 +37,7 @@ def download_stock_info(cloud_sso_token, data_path="../data/stock_info.csv"):
     all_df = all_df.sort_values('tickerSymbol')
     # 将列转换为字符串类型
     all_df['tickerSymbol'] = all_df['tickerSymbol'].astype(str)
-    all_df.to_csv(data_path, encoding="utf-8-sig", index=False)
+    return all_df
 
 
 if __name__ == "__main__":
