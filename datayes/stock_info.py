@@ -5,7 +5,7 @@ import requests
 import pandas as pd
 
 
-def download_stock_info(cloud_sso_token, data_path="../data/symbol.csv"):
+def download_stock_info(cloud_sso_token, data_path="../data/stock_info.csv"):
     logger = commons.get_logger()
     # 合并两个 DataFrame，并覆盖前面的数据
     all_df = pd.DataFrame({})
