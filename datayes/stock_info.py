@@ -22,6 +22,9 @@ def get_stock_info(cloud_sso_token):
         text = response.text
         result = json.loads(text)
         data = result["data"]
+        code = result["code"]
+        if code == -403:
+            return None
 
         df = pd.DataFrame(data)
         df = df[['tickerSymbol', 'stockName']]
@@ -42,5 +45,8 @@ def get_stock_info(cloud_sso_token):
 
 if __name__ == "__main__":
     CLOUD_SSO_TOKEN = "45C9F9C2DAE695A8A422628E3B294BD6"
-    download_stock_info(CLOUD_SSO_TOKEN, "../../data/symbol.csv")
+    s_df = get_stock_info(CLOUD_SSO_TOKEN)
+
+    logger = commons.get_logger()
+    logger.info(s_df)
     pass
