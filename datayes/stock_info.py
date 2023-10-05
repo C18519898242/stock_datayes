@@ -7,6 +7,8 @@ import pandas as pd
 
 def get_stock_info(cloud_sso_token):
     logger = commons.get_logger()
+    code = 1
+
     # 合并两个 DataFrame，并覆盖前面的数据
     all_df = pd.DataFrame({})
     for i in range(10):
@@ -24,7 +26,7 @@ def get_stock_info(cloud_sso_token):
         data = result["data"]
         code = result["code"]
         if code == -403:
-            return None
+            return None, code
 
         df = pd.DataFrame(data)
         df = df[['tickerSymbol', 'stockName']]
@@ -40,13 +42,13 @@ def get_stock_info(cloud_sso_token):
     all_df = all_df.sort_values('tickerSymbol')
     # 将列转换为字符串类型
     all_df['tickerSymbol'] = all_df['tickerSymbol'].astype(str)
-    return all_df
+    return all_df, code
 
 
 if __name__ == "__main__":
-    CLOUD_SSO_TOKEN = "45C9F9C2DAE695A8A422628E3B294BD6"
+    CLOUD_SSO_TOKEN = "459E17B183237E55405351E9C73EAB18"
     s_df = get_stock_info(CLOUD_SSO_TOKEN)
 
-    logger = commons.get_logger()
-    logger.info(s_df)
+    s_logger = commons.get_logger()
+    s_logger.info(s_df)
     pass
