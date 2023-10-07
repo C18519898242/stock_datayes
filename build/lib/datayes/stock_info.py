@@ -1,5 +1,4 @@
 import json
-
 import commons
 import requests
 import pandas as pd
@@ -46,7 +45,7 @@ def get_stock_info(cloud_sso_token):
 
 
 if __name__ == "__main__":
-    CLOUD_SSO_TOKEN = "459E17B183237E55405351E9C73EAB18"
+    CLOUD_SSO_TOKEN = "47E109B86A046D8035827F262475B70B"
     s_df = get_stock_info(CLOUD_SSO_TOKEN)
 
     s_logger = commons.get_logger()
